@@ -8,6 +8,9 @@ pipeline{
     
     stages{
         stage(build){
+	   when{
+		changeset "**/worker/**"
+		}
             steps{
                 echo 'Building worker app'
                 dir('worker')
@@ -15,6 +18,9 @@ pipeline{
             }
         }
         stage(test){
+	   when{
+                changeset "**/worker/**"
+                }
             steps{
                 echo 'Testing worker build'
                 dir('worker')
@@ -22,10 +28,15 @@ pipeline{
             }
         }
         stage(package){
+	when{
+          branch 'master'
+          changeset "**/worker/**"
+        }
             steps{
                 echo 'Creating Package'
                 dir('worker')
                 sh 'mvn package -DskipTests'
+		archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
             }
         }
     }
@@ -33,7 +44,6 @@ pipeline{
     post { 
         always { 
             echo 'Archieving Artifacts'
-            archiveArtifacts '\'**/target/*.jar\''
         }
     }
     
