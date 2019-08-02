@@ -90,9 +90,11 @@ class Worker {
 
     System.err.println("Connected to db");
     return conn;
+    
   }
 
   static void sleep(long duration) {
+
     try {
       Thread.sleep(duration);
     } catch (InterruptedException e) {
