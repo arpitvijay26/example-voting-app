@@ -1,7 +1,7 @@
 Example Voting App
 =========
 
-Getting started
+Getting started now
 ---------------
 
 
