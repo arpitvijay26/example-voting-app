@@ -11,18 +11,20 @@ pipeline{
             steps{
                 echo 'Building worker app'
                 dir('worker')
-		sh 'mvn compile'
+                sh 'mvn compile'
             }
         }
         stage(test){
             steps{
                 echo 'Testing worker build'
+                dir('worker')
                 sh 'mvn clean test'
             }
         }
         stage(package){
             steps{
                 echo 'Creating Package'
+                dir('worker')
                 sh 'mvn package -DskipTests'
             }
         }
