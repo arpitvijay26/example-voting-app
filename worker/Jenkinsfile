@@ -11,19 +11,19 @@ pipeline{
             steps{
                 echo 'Building worker app'
                 dir('worker')
-		sh 'mvn comp:ile'
+		sh 'mvn compile'
             }
         }
-        stage(two){
+        stage(test){
             steps{
-                echo 'The Great One'
-                sleep 7
+                echo 'Testing worker build'
+                sh 'mvn clean test'
             }
         }
-        stage(three){
+        stage(package){
             steps{
-                echo 'The Rock'
-                sleep 3
+                echo 'Creating Package'
+                sh 'mvn package -DskipTests'
             }
         }
     }
