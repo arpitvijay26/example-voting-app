@@ -7,6 +7,7 @@ pipeline{
     }
     
     stages{
+<<<<<<< HEAD
         stage(build){
             steps{
                 echo 'Building worker app'
@@ -15,6 +16,17 @@ pipeline{
             }
         }
         stage(test){
+=======
+        stage(one){
+          steps{
+              echo 'Compiling worker app'
+              dir('worker'){
+                sh 'mvn compile'
+              }
+          }
+      	}
+        stage(two){
+>>>>>>> 13a0acb5c9aea85a1e2dc179a947ffef1fb0a9d9
             steps{
                 echo 'Testing worker build'
                 sh 'mvn clean test'
